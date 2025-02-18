@@ -1,16 +1,17 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './WelcomeScreen.module.css';
 
-
 const WelcomeScreen: React.FC = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSelectDifficulty = (difficulty: string) => {
+    // console.log(`Selected difficulty: ${difficulty}`);
+    // navigate(' /game?difficuilty=${difficuulty}')
     console.log(`Selected difficulty: ${difficulty}`);
-    // navigate(`/game?difficulty=${difficulty}`);
-  };
+    navigate(`/game?difficulty=${difficulty}`);
 
+  };
 
   return (
     <div className={styles.container}>

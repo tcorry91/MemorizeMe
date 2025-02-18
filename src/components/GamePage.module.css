@@ -1,0 +1,23 @@
+/* src/components/GamePage.module.css */
+.container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 0.5rem;
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+  
+  .cell {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

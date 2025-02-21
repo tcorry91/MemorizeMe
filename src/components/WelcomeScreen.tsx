@@ -6,8 +6,6 @@ const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSelectDifficulty = (difficulty: string) => {
-    // console.log(`Selected difficulty: ${difficulty}`);
-    // navigate(' /game?difficuilty=${difficuulty}')
     console.log(`Selected difficulty: ${difficulty}`);
     navigate(`/game?difficulty=${difficulty}`);
 

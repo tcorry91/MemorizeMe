@@ -3,20 +3,30 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './GamePage.module.css';
 
+const colorOptions = ['red', 'blue', 'green', 'yellow'];
+
+const generateGrid = (gridSize: number) => {
+  const totalCells = gridSize * gridSize;
+  return Array.from({ length: totalCells }, (_, i) => ({
+    id: i,
+    color: colorOptions[Math.floor(Math.random() * colorOptions.length)],
+    revealed: true, // Initially, colors are shown
+  }));
+};
+
 const GamePage: React.FC = () => {
-  // Get query parameters from the URL
   const [searchParams] = useSearchParams();
   const difficulty = searchParams.get('difficulty');
 
-  // Determine grid size based on difficulty:
-  // For "easy" use 4x4, for "normal" use 5x5, for "hard" use 6x6.
-  let gridSize = 4; // default to easy
+  let gridSize = 4;
   if (difficulty === 'normal') gridSize = 5;
   else if (difficulty === 'hard') gridSize = 6;
 
-  // Create an array representing the grid cells
-  const totalCells = gridSize * gridSize;
-  const cells = Array.from({ length: totalCells }, (_, i) => i);
+  // Use the generateGrid function and store it in state.
+  const [grid, setGrid] = React.useState(() => generateGrid(gridSize));
+
+  // For now, we're just showing the grid with permanent colors.
+  // Later, you'll add logic to change revealed to false (fade to grey) after 3 seconds.
 
   return (
     <div className={styles.container}>
@@ -26,10 +36,14 @@ const GamePage: React.FC = () => {
         className={styles.grid}
         style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}
       >
-        {cells.map((cell) => (
-          <div key={cell} className={styles.cell}>
-            {/* For now we can show the cell number or leave it blank */}
-            {cell + 1}
+        {grid.map((cell) => (
+          <div
+            key={cell.id}
+            className={styles.cell}
+            style={{ background: cell.revealed ? cell.color : 'grey' }}
+          >
+            {/* Optionally show the cell number or color for debugging */}
+            {cell.revealed ? cell.color : ''}
           </div>
         ))}
       </div>
